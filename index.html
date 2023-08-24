@@ -7,7 +7,7 @@
 
     <link rel="icon" type="image/png" sizes="32x32" href="./images/dplogo.png" />
 
-    <title>Frontend Mentor | Advice generator app</title>
+    <title>DevPetrate Advice generator app</title>
 
     <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
     <style>
@@ -91,8 +91,8 @@
   </head>
   <body>
     <div class="container">
-      <p>Advice #<span class="adviceid">117</span></p>
-      <h1 class="advice">"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione ex quidem eaque pariatur"</h1>
+      <p>Advice #<span class="adviceid"></span></p>
+      <h1 class="advice"></h1>
       <img class="img1" src="./images/pattern-divider-desktop.svg" alt="" />
       <div class="img2con"><img class="img2" src="./images/icon-dice.svg" alt="" /></div>
     </div>
@@ -101,15 +101,21 @@
       const advice = document.querySelector(".advice");
       const resetadvise = document.querySelector(".img2con");
 
-      fetch("https://api.adviceslip.com/advice")
-        .then((response) => response.json())
-        .then((data) => {
-          advice.innerHTML = data.slip.advice;
-          adviceID.innerHTML = data.slip.id;
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      function fetchAdvice() {
+        fetch("https://api.adviceslip.com/advice")
+          .then((response) => response.json())
+          .then((data) => {
+            advice.innerHTML = data.slip.advice;
+            adviceID.innerHTML = data.slip.id;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+      fetchAdvice();
+      resetadvise.addEventListener("click", () => {
+        fetchAdvice();
+      });
     </script>
   </body>
 </html>
