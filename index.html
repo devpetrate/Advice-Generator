@@ -106,7 +106,7 @@
         fetch("https://api.adviceslip.com/advice")
           .then((response) => response.json())
           .then((data) => {
-            advice.innerHTML = data.slip.advice;
+            advice.innerHTML = '"' + data.slip.advice + '"';
             adviceID.innerHTML = data.slip.id;
           })
           .catch((error) => {
