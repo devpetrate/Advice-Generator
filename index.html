@@ -114,6 +114,7 @@
           });
       }
       fetchAdvice();
+      setInterval(fetchAdvice, 10000);
       resetadvise.addEventListener("click", () => {
         fetchAdvice();
       });
