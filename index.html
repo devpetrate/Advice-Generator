@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/dplogo.png" />
+
+    <title>Frontend Mentor | Advice generator app</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+      :root {
+        --white: hsl(193, 38%, 86%);
+        --green: hsl(150, 100%, 66%);
+        --GrayishBlue: hsl(217, 19%, 38%);
+        --darkgrey: hsl(217, 19%, 24%);
+        --darkergray: hsl(218, 23%, 16%);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Manrope", sans-serif;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: var(--darkergray);
+      }
+      .container {
+        width: 30rem;
+        height: auto;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        border-radius: 16px;
+        box-shadow: 2px 2px 4px var(--darkergrey);
+        background-color: var(--darkgrey);
+        color: var(--white);
+      }
+      p {
+        color: var(--green);
+        font-size: small;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 1rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .img1 {
+        margin-top: 1rem;
+      }
+      .img2con {
+        width: 60px;
+        height: 60px;
+        background-color: var(--green);
+        display: flex;
+        align-self: center;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        position: relative;
+        top: 60px;
+      }
+      .img2con:hover {
+        box-shadow: -2px -2px 2px 2px var(--green), -2px 2px 2px 2px var(--green), 2px -2px 2px 2px var(--green), 2px 2px 2px 2px var(--green);
+      }
+      .img2 {
+        width: 20px;
+        height: 20px;
+      }
+      @media screen and (max-width: 768px) {
+        .container {
+          width: 19rem;
+        }
+        h1 {
+          font-size: 1rem;
+          line-height: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p>Advice #<span class="adviceid">117</span></p>
+      <h1 class="advice">"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione ex quidem eaque pariatur"</h1>
+      <img class="img1" src="./images/pattern-divider-desktop.svg" alt="" />
+      <div class="img2con"><img class="img2" src="./images/icon-dice.svg" alt="" /></div>
+    </div>
+    <script>
+      const adviceID = document.querySelector(".adviceid");
+      const advice = document.querySelector(".advice");
+      const resetadvise = document.querySelector(".img2con");
+
+      fetch("https://api.adviceslip.com/advice")
+        .then((response) => response.json())
+        .then((data) => {
+          advice.innerHTML = data.slip.advice;
+          adviceID.innerHTML = data.slip.id;
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    </script>
+  </body>
+</html>
